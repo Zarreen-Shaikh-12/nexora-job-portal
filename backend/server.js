@@ -9,20 +9,24 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
+const { notFound, errorHandler } = require("./middleware/errorHandler");
 
 connectDB();
 
 const app = express();
 
+// On Render/Heroku the app sits behind a proxy; needed for secure cookies in production
+if (process.env.NODE_ENV === "production") app.set("trust proxy", 1);
+
 // ---------- Global middleware ----------
-app.use(helmet());                       // secure headers
-app.use(morgan("dev"));                  // request logging
-app.use(express.json());                 // parse JSON request bodies
-app.use(cookieParser());                 // parse cookies
+app.use(helmet());
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,      // only our React app may call us
-    credentials: true,                   // allow cookies cross-origin
+    origin: process.env.CLIENT_URL,
+    credentials: true,
   })
 );
 
@@ -31,12 +35,12 @@ app.get("/api/health", (req, res) => {
   res.status(200).json({ success: true, message: "Job Portal API is running" });
 });
 
-// (feature routes will be mounted here in later steps)
+app.use("/api/auth", require("./routes/authRoutes"));
+// (jobs, applications, contact routes will be mounted here in later steps)
 
-// ---------- 404 handler ----------
-app.use((req, res) => {
-  res.status(404).json({ success: false, message: `Route not found: ${req.originalUrl}` });
-});
+// ---------- Error handling (must be LAST) ----------
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
