@@ -36,7 +36,8 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/auth", require("./routes/authRoutes"));
-// (jobs, applications, contact routes will be mounted here in later steps)
+app.use("/api/jobs", require("./routes/jobRoutes"));
+// (applications and contact routes will be mounted here in later steps)
 
 // ---------- Error handling (must be LAST) ----------
 app.use(notFound);
