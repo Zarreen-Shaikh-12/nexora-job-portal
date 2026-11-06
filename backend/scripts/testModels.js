@@ -5,7 +5,7 @@ dns.setServers(['8.8.8.8', '1.1.1.1']);
 
 const mongoose = require("mongoose");
 const User = require("../models/User");
-const Job = require("../models/job");
+const Job = require("../models/Job");
 const Application = require("../models/Application");
 const Contact = require("../models/Contact");
 

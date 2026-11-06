@@ -18,9 +18,13 @@ const errorHandler = (err, req, res, next) => {
   if (err.code === 11000) {
     statusCode = 409;
     const fields = Object.keys(err.keyValue || {});
-    message = fields.includes("email")
-      ? "This email is already registered"
-      : `Duplicate value for: ${fields.join(", ")}`;
+    if (fields.includes("email")) {
+      message = "This email is already registered";
+    } else if (fields.includes("jobId") && fields.includes("applicantId")) {
+      message = "You have already applied to this job";
+    } else {
+      message = `Duplicate value for: ${fields.join(", ")}`;
+    }
   }
 
   // Mongoose schema validation failure
