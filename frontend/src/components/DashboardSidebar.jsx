@@ -15,7 +15,12 @@ const LINKS = {
     { to: "/dashboard/employer/post-job", label: "Post a job" },
     { to: "/dashboard/employer/profile", label: "Company profile" },
   ],
-  Admin: [{ to: "/dashboard/admin", label: "Overview", end: true }],
+    Admin: [
+    { to: "/dashboard/admin", label: "Overview", end: true },
+    { to: "/dashboard/admin/users", label: "Users" },
+    { to: "/dashboard/admin/jobs", label: "Jobs" },
+    { to: "/dashboard/admin/messages", label: "Messages" },
+  ],
 };
 
 const linkClass = ({ isActive }) =>

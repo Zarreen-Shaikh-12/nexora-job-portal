@@ -10,7 +10,6 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
-import DashboardPlaceholder from "./pages/DashboardPlaceholder";
 import SeekerOverview from "./pages/seeker/SeekerOverview";
 import SeekerApplications from "./pages/seeker/SeekerApplications";
 import SeekerProfile from "./pages/seeker/SeekerProfile";
@@ -19,6 +18,10 @@ import EmployerJobs from "./pages/employer/EmployerJobs";
 import EmployerJobForm from "./pages/employer/EmployerJobForm";
 import JobApplicants from "./pages/employer/JobApplicants";
 import EmployerProfile from "./pages/employer/EmployerProfile";
+import AdminOverview from "./pages/admin/AdminOverview";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminJobs from "./pages/admin/AdminJobs";
+import AdminMessages from "./pages/admin/AdminMessages";
 import RoleBasedRoute from "./routes/RoleBasedRoute";
 
 export default function App() {
@@ -58,9 +61,14 @@ export default function App() {
         </Route>
       </Route>
 
-      {/* Admin: real version in Step 10C */}
+      {/* Admin dashboard */}
       <Route element={<RoleBasedRoute allowedRoles={["Admin"]} />}>
-        <Route path="/dashboard/admin" element={<DashboardPlaceholder title="Admin Dashboard" />} />
+        <Route element={<DashboardLayout />}>
+          <Route path="/dashboard/admin" element={<AdminOverview />} />
+          <Route path="/dashboard/admin/users" element={<AdminUsers />} />
+          <Route path="/dashboard/admin/jobs" element={<AdminJobs />} />
+          <Route path="/dashboard/admin/messages" element={<AdminMessages />} />
+        </Route>
       </Route>
     </Routes>
   );

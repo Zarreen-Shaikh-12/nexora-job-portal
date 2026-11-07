@@ -7,6 +7,8 @@ const STYLES = {
   Closed: "bg-stone-200 text-stone-700",
   Unread: "bg-amber-100 text-amber-800",
   Replied: "bg-green-100 text-green-800",
+  Active: "bg-green-100 text-green-800",
+  Deactivated: "bg-red-100 text-red-800",
 };
 
 export default function StatusBadge({ status }) {

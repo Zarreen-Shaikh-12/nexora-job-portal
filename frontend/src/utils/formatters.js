@@ -8,3 +8,5 @@ export const formatSalary = (range) => {
 
 export const formatDate = (iso) =>
   new Date(iso).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+
+export const roleLabel = (role) => (role === "JobSeeker" ? "Job Seeker" : role);
