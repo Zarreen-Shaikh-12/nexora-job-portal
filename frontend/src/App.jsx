@@ -4,6 +4,9 @@ import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
 import JobDetails from "./pages/JobDetails";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 import DashboardPlaceholder from "./pages/DashboardPlaceholder";
@@ -17,12 +20,13 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/jobs/:id" element={<JobDetails />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFound />} />
       </Route>
-
-      {/* Temporary: moves into MainLayout in Step 9B */}
-      <Route path="/login" element={<Login />} />
 
       {/* Dashboards: real versions with their own layout in Step 10 */}
       <Route element={<RoleBasedRoute allowedRoles={["JobSeeker"]} />}>
