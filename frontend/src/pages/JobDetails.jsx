@@ -6,31 +6,81 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
 import { formatDate, formatSalary } from "../utils/formatters";
 
+import { getMyApplications } from "../services/applicationService";
+import ApplicationModal from "../components/ApplicationModal";
+import StatusBadge from "../components/StatusBadge";
+import MatchScoreIndicator from "../components/MatchScoreIndicator";
+
 function ApplyPanel({ job }) {
   const { user, loading } = useAuth();
   const location = useLocation();
+  const [existing, setExisting] = useState(null); // this user's application for this job
+  const [checking, setChecking] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
-  if (loading) return null;
-  if (job.status !== "Open") {
-    return <p className="rounded bg-stone-100 p-3 text-sm text-stone-700">This job is closed and no longer accepts applications.</p>;
-  }
-  if (!user) {
-    return (
+  const isSeeker = user?.role === "JobSeeker";
+
+  // For job seekers: have they already applied to this job?
+  useEffect(() => {
+    if (!isSeeker) return;
+    let active = true;
+    setChecking(true);
+    getMyApplications()
+      .then((res) => {
+        if (active) setExisting(res.data.applications.find((a) => a.jobId?._id === job._id) || null);
+      })
+      .catch(() => {}) // if this check fails, the server still blocks duplicates
+      .finally(() => active && setChecking(false));
+    return () => { active = false; };
+  }, [isSeeker, job._id]);
+
+  const note = "bg-stone-100 p-3 text-sm text-stone-700";
+  let content;
+
+  if (loading || (isSeeker && checking)) {
+    content = null;
+  } else if (existing) {
+    content = (
+      <div className="border border-line p-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm">You applied on {formatDate(existing.appliedAt)}</p>
+          <StatusBadge status={existing.status} />
+        </div>
+        <div className="mt-3 max-w-xs"><MatchScoreIndicator score={existing.matchScore} /></div>
+        <Link to="/dashboard/seeker/applications"
+          className="mt-3 inline-block text-sm underline underline-offset-4 hover:text-accent">
+          View in my applications
+        </Link>
+      </div>
+    );
+  } else if (job.status !== "Open") {
+    content = <p className={note}>This job is closed and no longer accepts applications.</p>;
+  } else if (!user) {
+    content = (
       <Link to="/login" state={{ from: location }}
-        className="inline-block rounded bg-ink px-5 py-2 font-medium text-white hover:bg-stone-700">
+        className="inline-block bg-ink px-6 py-2 text-sm text-white hover:bg-stone-700">
         Login to apply
       </Link>
     );
-  }
-  if (user.role === "JobSeeker") {
-    // Replaced by the real Apply flow (ApplicationModal) in Step 10
-    return (
-      <button disabled className="cursor-not-allowed rounded bg-stone-400 px-5 py-2 font-medium text-white">
-        Apply (coming in Step 10)
+  } else if (isSeeker) {
+    content = (
+      <button onClick={() => setModalOpen(true)} className="bg-ink px-6 py-2 text-sm text-white hover:bg-stone-700">
+        Apply now
       </button>
     );
+  } else {
+    content = <p className={note}>Only job seekers can apply to jobs.</p>;
   }
-  return <p className="rounded bg-stone-100 p-3 text-sm text-stone-700">Only job seekers can apply to jobs.</p>;
+
+  // The modal is rendered outside the branches above, so it stays open when `existing` is set
+  return (
+    <>
+      {content}
+      {modalOpen && (
+        <ApplicationModal job={job} onClose={() => setModalOpen(false)} onApplied={setExisting} />
+      )}
+    </>
+  );
 }
 
 export default function JobDetails() {

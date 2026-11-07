@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
 import JobDetails from "./pages/JobDetails";
@@ -10,12 +11,15 @@ import Contact from "./pages/Contact";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 import DashboardPlaceholder from "./pages/DashboardPlaceholder";
+import SeekerOverview from "./pages/seeker/SeekerOverview";
+import SeekerApplications from "./pages/seeker/SeekerApplications";
+import SeekerProfile from "./pages/seeker/SeekerProfile";
 import RoleBasedRoute from "./routes/RoleBasedRoute";
 
 export default function App() {
   return (
     <Routes>
-      {/* Public pages share Navbar + Footer through MainLayout */}
+      {/* Public pages */}
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
@@ -28,10 +32,16 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Route>
 
-      {/* Dashboards: real versions with their own layout in Step 10 */}
+      {/* Job Seeker dashboard: role guard first, then the dashboard shell */}
       <Route element={<RoleBasedRoute allowedRoles={["JobSeeker"]} />}>
-        <Route path="/dashboard/seeker" element={<DashboardPlaceholder title="Job Seeker Dashboard" />} />
+        <Route element={<DashboardLayout />}>
+          <Route path="/dashboard/seeker" element={<SeekerOverview />} />
+          <Route path="/dashboard/seeker/applications" element={<SeekerApplications />} />
+          <Route path="/dashboard/seeker/profile" element={<SeekerProfile />} />
+        </Route>
       </Route>
+
+      {/* Employer and Admin: real versions in Steps 10B and 10C */}
       <Route element={<RoleBasedRoute allowedRoles={["Employer"]} />}>
         <Route path="/dashboard/employer" element={<DashboardPlaceholder title="Employer Dashboard" />} />
       </Route>
