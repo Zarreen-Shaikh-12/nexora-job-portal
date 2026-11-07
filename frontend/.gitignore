@@ -23,3 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Ignore all environment files
+.env.*
+!.env.example
+
+# Ignore nested node_modules
+**/node_modules/
