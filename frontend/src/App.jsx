@@ -14,6 +14,11 @@ import DashboardPlaceholder from "./pages/DashboardPlaceholder";
 import SeekerOverview from "./pages/seeker/SeekerOverview";
 import SeekerApplications from "./pages/seeker/SeekerApplications";
 import SeekerProfile from "./pages/seeker/SeekerProfile";
+import EmployerOverview from "./pages/employer/EmployerOverview";
+import EmployerJobs from "./pages/employer/EmployerJobs";
+import EmployerJobForm from "./pages/employer/EmployerJobForm";
+import JobApplicants from "./pages/employer/JobApplicants";
+import EmployerProfile from "./pages/employer/EmployerProfile";
 import RoleBasedRoute from "./routes/RoleBasedRoute";
 
 export default function App() {
@@ -32,7 +37,7 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Route>
 
-      {/* Job Seeker dashboard: role guard first, then the dashboard shell */}
+      {/* Job Seeker dashboard */}
       <Route element={<RoleBasedRoute allowedRoles={["JobSeeker"]} />}>
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard/seeker" element={<SeekerOverview />} />
@@ -41,10 +46,19 @@ export default function App() {
         </Route>
       </Route>
 
-      {/* Employer and Admin: real versions in Steps 10B and 10C */}
+      {/* Employer dashboard */}
       <Route element={<RoleBasedRoute allowedRoles={["Employer"]} />}>
-        <Route path="/dashboard/employer" element={<DashboardPlaceholder title="Employer Dashboard" />} />
+        <Route element={<DashboardLayout />}>
+          <Route path="/dashboard/employer" element={<EmployerOverview />} />
+          <Route path="/dashboard/employer/jobs" element={<EmployerJobs />} />
+          <Route path="/dashboard/employer/post-job" element={<EmployerJobForm />} />
+          <Route path="/dashboard/employer/jobs/:id/edit" element={<EmployerJobForm />} />
+          <Route path="/dashboard/employer/jobs/:jobId/applicants" element={<JobApplicants />} />
+          <Route path="/dashboard/employer/profile" element={<EmployerProfile />} />
+        </Route>
       </Route>
+
+      {/* Admin: real version in Step 10C */}
       <Route element={<RoleBasedRoute allowedRoles={["Admin"]} />}>
         <Route path="/dashboard/admin" element={<DashboardPlaceholder title="Admin Dashboard" />} />
       </Route>

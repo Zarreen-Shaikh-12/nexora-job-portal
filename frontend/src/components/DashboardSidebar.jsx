@@ -8,7 +8,13 @@ const LINKS = {
     { to: "/dashboard/seeker/applications", label: "My applications" },
     { to: "/dashboard/seeker/profile", label: "Profile & skills" },
   ],
-  Employer: [{ to: "/dashboard/employer", label: "Overview", end: true }],
+//   Employer: [{ to: "/dashboard/employer", label: "Overview", end: true }],
+    Employer: [
+    { to: "/dashboard/employer", label: "Overview", end: true },
+    { to: "/dashboard/employer/jobs", label: "My jobs" },
+    { to: "/dashboard/employer/post-job", label: "Post a job" },
+    { to: "/dashboard/employer/profile", label: "Company profile" },
+  ],
   Admin: [{ to: "/dashboard/admin", label: "Overview", end: true }],
 };
 
