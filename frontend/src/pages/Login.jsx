@@ -63,9 +63,9 @@ export default function Login() {
 
   return (
     <div className="mx-auto max-w-md px-4 py-12">
-      <form onSubmit={handleSubmit} noValidate className="space-y-4 rounded-lg bg-white p-6 shadow-sm">
-        <h1 className="text-2xl font-bold">Welcome back</h1>
-        <p className="text-sm text-gray-600">Log in to manage your applications or job postings.</p>
+      <form onSubmit={handleSubmit} noValidate className="space-y-4 rounded-lg bg-white p-6 border border-line">
+        <h1 className="text-2xl font-medium">Welcome back</h1>
+        <p className="text-sm text-stone-600">Log in to manage your applications or job postings.</p>
 
         {formError && (
           <p className="rounded bg-red-50 p-3 text-sm text-red-700" role="alert">{formError}</p>
@@ -85,22 +85,22 @@ export default function Login() {
         </FormField>
 
         <button type="submit" disabled={submitting}
-          className="w-full rounded bg-blue-600 py-2 font-medium text-white hover:bg-blue-700 disabled:opacity-60">
+          className="w-full rounded bg-ink py-2 font-medium text-white hover:bg-stone-700 disabled:opacity-60">
           {submitting ? "Logging in..." : "Login"}
         </button>
 
-        <p className="text-center text-sm text-gray-600">
-          New here? <Link to="/register" className="font-medium text-blue-600 hover:underline">Create an account</Link>
+        <p className="text-center text-sm text-stone-600">
+          New here? <Link to="/register" className="font-medium text-accent hover:underline">Create an account</Link>
         </p>
 
         {import.meta.env.DEV && (
-          <div className="rounded border border-dashed border-gray-300 p-3">
-            <p className="mb-2 text-xs font-medium text-gray-500">Dev only: fill a demo account</p>
+          <div className="rounded border border-dashed border-stone-300 p-3">
+            <p className="mb-2 text-xs font-medium text-stone-500">Dev only: fill a demo account</p>
             <div className="flex flex-wrap gap-2">
               {DEMO_ACCOUNTS.map((acc) => (
                 <button key={acc.email} type="button"
                   onClick={() => { setForm({ email: acc.email, password: DEMO_PASSWORD }); setErrors({}); }}
-                  className="rounded bg-gray-100 px-3 py-1 text-xs hover:bg-gray-200">
+                  className="rounded bg-stone-100 px-3 py-1 text-xs hover:bg-stone-200">
                   {acc.label}
                 </button>
               ))}

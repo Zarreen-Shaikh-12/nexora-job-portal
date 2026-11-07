@@ -11,10 +11,10 @@ export default function PasswordStrength({ password }) {
     <div className="mt-2" aria-live="polite">
       <div className="flex gap-1">
         {[1, 2, 3, 4].map((i) => (
-          <span key={i} className={`h-1.5 flex-1 rounded ${i <= score ? COLORS[score] : "bg-gray-200"}`} />
+          <span key={i} className={`h-1.5 flex-1 rounded ${i <= score ? COLORS[score] : "bg-stone-200"}`} />
         ))}
       </div>
-      <p className="mt-1 text-xs text-gray-600">
+      <p className="mt-1 text-xs text-stone-600">
         Strength: <strong>{label}</strong>. Use 8+ characters with upper and lower case, a number and a symbol.
       </p>
     </div>

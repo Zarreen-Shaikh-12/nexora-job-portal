@@ -22,7 +22,7 @@ export default function PasswordInput({ id, name, value, onChange, autoComplete,
         onClick={() => setVisible((v) => !v)}
         aria-label={visible ? "Hide password" : "Show password"}
         aria-pressed={visible}
-        className="absolute inset-y-0 right-0 px-3 text-sm font-medium text-blue-600 hover:text-blue-800"
+        className="absolute inset-y-0 right-0 px-3 text-sm font-medium text-accent hover:text-ink"
       >
         {visible ? "Hide" : "Show"}
       </button>

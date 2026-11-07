@@ -1,5 +1,5 @@
 export default function JobFilters({ jobType, sort, onChange }) {
-  const selectClass = "rounded border border-gray-300 bg-white px-3 py-2 text-sm";
+  const selectClass = "rounded border border-stone-300 bg-white px-3 py-2 text-sm";
   return (
     <div className="flex flex-wrap items-center gap-3">
       <div>

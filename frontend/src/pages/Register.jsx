@@ -88,24 +88,24 @@ export default function Register() {
 
   return (
     <div className="mx-auto max-w-lg px-4 py-12">
-      <form onSubmit={handleSubmit} noValidate className="space-y-4 rounded-lg bg-white p-6 shadow-sm">
-        <h1 className="text-2xl font-bold">Create your account</h1>
+      <form onSubmit={handleSubmit} noValidate className="space-y-4 rounded-lg bg-white p-6 border border-line">
+        <h1 className="text-2xl font-medium">Create your account</h1>
 
         {formError && (
           <p className="rounded bg-red-50 p-3 text-sm text-red-700" role="alert">{formError}</p>
         )}
 
         <fieldset>
-          <legend className="mb-1 text-sm font-medium text-gray-800">I am a</legend>
+          <legend className="mb-1 text-sm font-medium text-stone-800">I am a</legend>
           <div className="grid grid-cols-2 gap-3">
             {ROLE_OPTIONS.map((opt) => (
               <label key={opt.value}
                 className={`cursor-pointer rounded border p-3 text-sm ${
-                  form.role === opt.value ? "border-blue-600 bg-blue-50" : "border-gray-300"}`}>
+                  form.role === opt.value ? "border-ink bg-accent-soft" : "border-stone-300"}`}>
                 <input type="radio" name="role" value={opt.value} checked={form.role === opt.value}
                   onChange={handleChange} className="mr-2" />
                 <span className="font-medium">{opt.title}</span>
-                <span className="block text-xs text-gray-600">{opt.text}</span>
+                <span className="block text-xs text-stone-600">{opt.text}</span>
               </label>
             ))}
           </div>
@@ -153,12 +153,12 @@ export default function Register() {
         </FormField>
 
         <button type="submit" disabled={submitting}
-          className="w-full rounded bg-blue-600 py-2 font-medium text-white hover:bg-blue-700 disabled:opacity-60">
+          className="w-full rounded bg-ink py-2 font-medium text-white hover:bg-stone-700 disabled:opacity-60">
           {submitting ? "Creating account..." : "Create account"}
         </button>
 
-        <p className="text-center text-sm text-gray-600">
-          Already registered? <Link to="/login" className="font-medium text-blue-600 hover:underline">Login</Link>
+        <p className="text-center text-sm text-stone-600">
+          Already registered? <Link to="/login" className="font-medium text-accent hover:underline">Login</Link>
         </p>
       </form>
     </div>

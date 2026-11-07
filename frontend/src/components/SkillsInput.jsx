@@ -48,13 +48,13 @@ export default function SkillsInput({ id, skills, onChange }) {
       {skills.length > 0 && (
         <ul className="mt-2 flex flex-wrap gap-2" aria-label="Added skills">
           {skills.map((skill) => (
-            <li key={skill} className="flex items-center gap-1 rounded bg-blue-50 px-2 py-1 text-sm text-blue-700">
+            <li key={skill} className="flex items-center gap-1 rounded bg-accent-soft px-2 py-1 text-sm text-accent">
               {skill}
               <button
                 type="button"
                 onClick={() => onChange(skills.filter((s) => s !== skill))}
                 aria-label={`Remove ${skill}`}
-                className="font-bold text-blue-500 hover:text-red-600"
+                className="font-medium text-accent hover:text-red-600"
               >
                 ×
               </button>

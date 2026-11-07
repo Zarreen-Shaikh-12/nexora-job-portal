@@ -10,7 +10,7 @@ export default function SearchBar({ initialSearch = "", initialLocation = "", on
     onSearch({ search: search.trim(), location: location.trim() });
   };
 
-  const inputClass = "w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900";
+  const inputClass = "w-full rounded border border-stone-300 bg-white px-3 py-2 text-stone-900";
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:flex-row" role="search">
@@ -25,7 +25,7 @@ export default function SearchBar({ initialSearch = "", initialLocation = "", on
           onChange={(e) => setLocation(e.target.value)} className={inputClass} />
       </div>
       <button type="submit"
-        className="rounded bg-blue-600 px-6 py-2 font-medium text-white hover:bg-blue-700">
+        className="rounded bg-ink px-6 py-2 font-medium text-white hover:bg-stone-700">
         Search
       </button>
     </form>

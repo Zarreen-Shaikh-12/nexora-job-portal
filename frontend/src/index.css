@@ -1,1 +1,29 @@
 @import "tailwindcss";
+
+/* Our design tokens. Tailwind turns each one into utility classes:
+   --color-ink -> bg-ink / text-ink / border-ink, --font-serif -> font-serif, etc. */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+
+  --color-paper: #faf8f5;       /* page background */
+  --color-ink: #1c1917;         /* text and primary buttons */
+  --color-line: #e7e2da;        /* hairline borders */
+  --color-accent: #7a5f2f;      /* bronze, used sparingly */
+  --color-accent-soft: #f4eee2; /* very light bronze tint */
+
+  --radius-lg: 0.25rem;         /* rounded-lg becomes a subtle, crisp corner */
+}
+
+/* Base styles apply to plain HTML elements, so every heading becomes serif automatically */
+@layer base {
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+}

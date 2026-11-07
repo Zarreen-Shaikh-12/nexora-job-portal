@@ -4,9 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 import { dashboardPathFor } from "../utils/roleRedirect";
 
 const linkClass = ({ isActive }) =>
-  `rounded px-3 py-2 text-sm font-medium ${
-    isActive ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
-  }`;
+  `px-3 py-2 text-sm ${isActive ? "text-ink" : "text-stone-500 hover:text-ink"}`;
 
 export default function Navbar() {
   const { user, loading, logout } = useAuth();
@@ -34,42 +32,41 @@ export default function Navbar() {
   const authLinks = loading ? null : user ? (
     <>
       <Link to={dashboardPathFor(user.role)} onClick={closeMenu}
-        className="rounded px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">
+        className="px-3 py-2 text-sm text-stone-500 hover:text-ink">
         Dashboard
       </Link>
       <button onClick={handleLogout}
-        className="rounded bg-gray-800 px-4 py-2 text-sm font-medium text-white hover:bg-gray-900">
+        className="border border-ink px-5 py-2 text-sm text-ink hover:bg-ink hover:text-white">
         Logout
       </button>
     </>
   ) : (
     <>
-      <Link to="/login" onClick={closeMenu}
-        className="rounded px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">
+      <Link to="/login" onClick={closeMenu} className="px-3 py-2 text-sm text-stone-500 hover:text-ink">
         Login
       </Link>
       <Link to="/register" onClick={closeMenu}
-        className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">
+        className="bg-ink px-5 py-2 text-sm text-white hover:bg-stone-700">
         Register
       </Link>
     </>
   );
 
   return (
-    <header className="sticky top-0 z-40 border-b border-gray-200 bg-white">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3" aria-label="Main">
-        <Link to="/" className="text-xl font-bold text-blue-600">JobPortal</Link>
+    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4" aria-label="Main">
+        <Link to="/" className="font-serif text-2xl tracking-tight text-ink">JobPortal</Link>
 
         {/* Desktop */}
         <div className="hidden items-center gap-1 md:flex">
           {links}
-          <span className="mx-2 h-6 w-px bg-gray-200" />
+          <span className="mx-3 h-5 w-px bg-line" />
           {authLinks}
         </div>
 
         {/* Mobile toggle */}
         <button
-          className="rounded p-2 text-gray-700 md:hidden"
+          className="p-2 text-ink md:hidden"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
           aria-controls="mobile-menu"
@@ -80,7 +77,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div id="mobile-menu" className="flex flex-col gap-1 border-t border-gray-200 px-4 py-3 md:hidden">
+        <div id="mobile-menu" className="flex flex-col gap-1 border-t border-line px-4 py-3 md:hidden">
           {links}
           <div className="mt-2 flex flex-col items-start gap-2">{authLinks}</div>
         </div>

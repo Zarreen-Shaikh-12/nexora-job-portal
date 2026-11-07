@@ -61,9 +61,9 @@ export default function Jobs() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
-      <h1 className="text-3xl font-bold">Browse jobs</h1>
+      <h1 className="text-3xl font-medium">Browse jobs</h1>
 
-      <div className="mt-4 rounded-lg bg-white p-4 shadow-sm">
+      <div className="mt-4 rounded-lg bg-white p-4 border border-line">
         {/* key remounts the bar when the URL changes (e.g. browser back button) */}
         <SearchBar key={`${search}|${location}`} initialSearch={search} initialLocation={location}
           onSearch={updateParams} />
@@ -78,15 +78,15 @@ export default function Jobs() {
 
         {!loading && !error && (
           <>
-            <p className="mb-3 text-sm text-gray-600">
+            <p className="mb-3 text-sm text-stone-600">
               {pagination.total} {pagination.total === 1 ? "job" : "jobs"} found
             </p>
             {jobs.length === 0 ? (
-              <div className="rounded-lg bg-white p-10 text-center shadow-sm">
+              <div className="rounded-lg bg-white p-10 text-center border border-line">
                 <p className="text-lg font-medium">No jobs match your search</p>
-                <p className="mt-1 text-sm text-gray-600">Try a different title, location, or clear the filters.</p>
+                <p className="mt-1 text-sm text-stone-600">Try a different title, location, or clear the filters.</p>
                 <button onClick={() => setSearchParams({})}
-                  className="mt-4 rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">
+                  className="mt-4 rounded bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-stone-700">
                   Clear all filters
                 </button>
               </div>
