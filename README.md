@@ -1,4 +1,4 @@
-# Job Portal & Recruitment Management System
+# Nexora : Job Portal & Recruitment Management System
 
 A MERN-stack recruitment platform connecting Job Seekers, Employers and Administrators, with a
 transparent skill-based **ATS match score**. Built as a C-DAC academic project.
